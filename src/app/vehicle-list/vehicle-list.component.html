@@ -1,0 +1,9 @@
+<table class="tftable">
+  <tr><th>ID</th><th>Name</th><th>Type</th><th>Mass</th>
+  <tr *ngFor="let vehicle of vehicles"
+      (click)="onSelect(vehicle)"
+      [class.selected]="vehicle === selectedVehicle">
+	<td>{{vehicle.id}}</td> <td>{{vehicle.name}}</td> <td>{{vehicle.type}}</td> <td>{{vehicle.mass}}</td>
+  </tr>
+</table>
+<app-vehicle-details [vehicle]="selectedVehicle"></app-vehicle-details>

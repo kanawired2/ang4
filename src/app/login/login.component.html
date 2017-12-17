@@ -1,0 +1,12 @@
+<div class="container">
+	<!-- <p> {{ _postsArray | json }} </p> -->
+    <div class="row">
+		<form [formGroup]="myform" (ngSubmit)="onSubmit($event)">
+		  <label>Username</label>
+		  <input formControlName="name" name="username" id="username" type="text">
+		  <label>Password</label>
+		  <input formControlName="pass" name="password" id="password" type="password">
+		  <button [disabled]="myform.invalid" type="submit">Submit</button>
+		</form>
+	</div>
+</div>

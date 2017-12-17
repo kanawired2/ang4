@@ -1,0 +1,21 @@
+<div class="container">
+	<!-- <p> {{ result | json }} </p> -->
+     <div class="row">
+         <table class="table">
+             <thead class="thead-inverse">
+             <tr>
+                 <th class="text-center">ID</th>
+                 <th class="text-center">Name</th>
+                 <th class="text-center">Mail</th>
+             </tr>
+             </thead>
+             <tbody>
+             <tr *ngFor="let user of result">
+                <td class="text-center" style="width: 15px;">{{user.uid}}</td>
+                <td class="text-center" style="width: 200px;">{{user.name}}</td>
+                <td class="text-center">{{user.roles_target_id}}</td>
+             </tr>
+             </tbody>
+         </table>
+     </div>
+ </div>
