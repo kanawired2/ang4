@@ -14,10 +14,11 @@
                 <td class="text-center" style="width: 15px;">{{post.nid}}</td>
                 <td class="text-center" style="width: 200px;">{{post.title}}</td>
                 <td class="text-center"> 
-                    <a (click)="viewContent($event)" id="{{post.nid}}">View</a>
+                    <a tooltip="View {{post.title}}" (click)="viewContent($event)" id="{{post.nid}}">View</a>
                 </td>
              </tr>
              </tbody>
          </table>
      </div>
  </div>
+ 

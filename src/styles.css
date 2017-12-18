@@ -1,2 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-@import 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css';
+/*@import 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css';*/
+@import '~bootstrap/dist/css/bootstrap.min.css';
+.navbar-default .navbar-nav>li>a{color: white;}
+footer{color:white;background-color: #4c88e8;}
