@@ -21,15 +21,22 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.myform = new FormGroup({
-        name : new FormControl('', Validators.required),
+        name : new FormControl('',[
+                       Validators.required,
+                       Validators.minLength(5)
+        ]),
         pass : new FormControl('', [
-          Validators.required
+          Validators.required,
+          Validators.minLength(6)
         ]),
     });
   }
 
+  doReset(){
+    this.myform.reset();
+  }
 
-  onSubmit(e) {
+  doSubmit(e) {
     
     e.preventDefault();
 

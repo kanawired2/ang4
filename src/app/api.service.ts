@@ -12,10 +12,12 @@ export class ApiService {
   private URL = "http://dev-dstack.pantheonsite.io/jcontent";
   private URL_users = "http://dev-dstack.pantheonsite.io/jusers";
   private URL_node = "http://dev-dstack.pantheonsite.io/node/";
+  private URL_user = "http://dev-dstack.pantheonsite.io/user/";
 
   private ContentUrl = "";
   arg: any;
   node_url: any;
+  user_url: any;
 
   constructor(protected httpClient: HttpClient, private router: Router) {}
  
@@ -29,6 +31,14 @@ export class ApiService {
     return this.httpClient
     .get(`${this.URL}`)
     .catch(this.handleError);
+  }
+
+  public getUser(uid) {
+    this.user_url = this.URL_user + uid + "?_format=json";
+    return this.httpClient
+      .get(`${this.user_url}`)
+      .catch(this.handleError);   
+    
   }
 
 

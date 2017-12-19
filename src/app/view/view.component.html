@@ -1,12 +1,14 @@
 <div class="container">
-	<!-- <p> {{ _postsArray | json }} </p> -->
+	<!-- <p> {{ title | json }} </p> -->
     <div class="row">
      	<h2 id="title"></h2>
 		<p id="content">
 		  Loading...
 		</p>
-		<div class="info">
+		<div *ngIf="title" class="info">
 			<button type="button" class="btn btn-primary" (click)="openModalWithComponent()">Info</button>
+			<button type="button" routerLink='/nodes' class="btn btn-secondary">Nodes</button>
+
 		</div>		
 	</div>
 </div>

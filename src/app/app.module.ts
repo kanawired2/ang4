@@ -6,6 +6,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {Routes, RouterModule} from "@angular/router";
 
 import { AppBootstrapModule } from './app-bootstrap/app-bootstrap.module';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 import { AppComponent }  from './app.component';
 import { ArticleComponent }  from './article.component';
@@ -24,6 +25,7 @@ import { AuthService } from './auth.service';
   ],
   imports: [     
         AppBootstrapModule,
+        NgxPaginationModule,
         BrowserModule,
         HttpModule,
         FormsModule,

@@ -10,15 +10,16 @@
              </tr>
              </thead>
              <tbody>
-             <tr *ngFor="let post of _postsArray">
+             <tr *ngFor="let post of _postsArray | paginate: { itemsPerPage: 10, currentPage: p };">
                 <td class="text-center" style="width: 15px;">{{post.nid}}</td>
                 <td class="text-center" style="width: 200px;">{{post.title}}</td>
                 <td class="text-center"> 
-                    <a tooltip="View {{post.title}}" (click)="viewContent($event)" id="{{post.nid}}">View</a>
+                    <a  tabindex="-1"  tooltip="View {{post.title}}" (click)="viewContent($event)" id="{{post.nid}}" href="">View</a>
                 </td>
              </tr>
              </tbody>
          </table>
+         <pagination-controls *ngIf="_postsArray" (pageChange)="p = $event"></pagination-controls>
      </div>
  </div>
  

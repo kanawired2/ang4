@@ -1,12 +1,19 @@
 <div class="container">
-	<!-- <p> {{ _postsArray | json }} </p> -->
+	<pre>Pristine? {{ myform.pristine }}</pre>
     <div class="row">
-		<form [formGroup]="myform" (ngSubmit)="onSubmit($event)">
-		  <label>Username</label>
-		  <input formControlName="name" name="username" id="username" type="text">
-		  <label>Password</label>
-		  <input formControlName="pass" name="password" id="password" type="password">
-		  <button class="btn btn-primary" [disabled]="myform.invalid" type="submit">Submit</button>
+		<form [formGroup]="myform" (ngSubmit)="doSubmit($event)">
+		  	<div class="form-group">
+			  <label>Username</label>
+			  <input formControlName="name" class="has-danger" name="username" id="username" type="text">
+			</div>
+			<div class="form-group">
+				<label>Password</label>
+		  		<input formControlName="pass" name="password" id="password" type="password">
+			</div>		
+			<div class="form-group">
+		  		<button class="btn btn-primary"  [disabled]="myform.invalid" type="submit">Submit</button>
+		  		<button class="btn btn-secondary" (click)="doReset()"  [disabled]="myform.pristine" type="submit">Reset</button>
+		  	</div>
 		</form>
 	</div>
 </div>

@@ -17,6 +17,7 @@ export class ViewComponent implements OnInit {
   node:any;
   created:any;
   title:any;
+  uid:number;
 
   constructor(private modalService: BsModalService,private router: Router, protected httpClient: HttpClient, private apiservice: ApiService) { }
 
@@ -30,6 +31,7 @@ export class ViewComponent implements OnInit {
         myTitle.innerHTML = data['title'][0]['value'];
         this.created = data['created'][0]['value'];        
         this.title = data['title'][0]['value'];        
+        this.uid = data['uid'][0]['target_id'];        
       }
     );
   }
@@ -42,19 +44,23 @@ export class ViewComponent implements OnInit {
     this.bsModalRef.content.title = 'Loading...';
     this.bsModalRef.content.list = list;
     this.bsModalRef.content.title = this.title;
-    list.pop();
-    list.push("Created On - " + this.created);
-    /*setTimeout(() => {
-      this.apiservice.viewContent().subscribe(
-        data => {
-          console.log(data);   
-          this.bsModalRef.content.title = this.title;
-          list.pop();
-          list.push("Created On - " + this.created);    
-        }
-      )
-
-    }, 200);*/
+    
+    if(this.uid == 0){
+      list.pop();
+      list.push("Console generated content");    
+      list.push("Created On - " + this.created);
+    }else{
+      setTimeout(() => {
+        this.apiservice.getUser(this.uid).subscribe(
+          data => {
+            list.pop();
+            list.push("User - " + data['name'][0]['value']);    
+            list.push("Created On - " + this.created);    
+          }
+        );
+      }, 200);  
+    }
+    
   }
 
 }

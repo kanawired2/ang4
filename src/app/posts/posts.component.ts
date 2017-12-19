@@ -5,6 +5,8 @@ import {IPosts} from "../posts";
 import { HttpClient } from '@angular/common/http';
 import {Router} from "@angular/router";
 
+import {NgxPaginationModule} from 'ngx-pagination';
+
  
 @Component({
     selector: 'app-posts',
@@ -16,6 +18,7 @@ export class PostsComponent implements OnInit {
     _postsArray: IPosts[];
     
     private Url = '';
+    p: number = 1;
 
     constructor(private apiSerivce: ApiService, protected httpClient: HttpClient, private router: Router) {
     }
