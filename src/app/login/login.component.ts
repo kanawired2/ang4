@@ -2,9 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { NgModule} from '@angular/core';
+import {Router} from "@angular/router";
 
-import { AuthService } from '../auth.service';
+import { AuthServiceProvider } from '../auth.service';
 import { UserCred } from '../usercred';
+
+import { AuthService } from "angular4-social-login";
+import { FacebookLoginProvider, GoogleLoginProvider } from "angular4-social-login";
 
 @Component({
   selector: 'app-login',
@@ -17,7 +21,7 @@ export class LoginComponent implements OnInit {
 
   private LoginUrl = "http://dev-dstack.pantheonsite.io/user/login?_format=json";
 
-  constructor(private authservice: AuthService) { }
+  constructor(private authservice: AuthServiceProvider, private auth: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.myform = new FormGroup({
@@ -50,6 +54,19 @@ export class LoginComponent implements OnInit {
     //this.myform.reset();
 
            
+  }
+
+  signInWithGoogle(): void {
+    this.auth.signIn(GoogleLoginProvider.PROVIDER_ID);
+    this.router.navigateByUrl('demo');
+  }
+ 
+  signInWithFB(): void {
+    this.auth.signIn(FacebookLoginProvider.PROVIDER_ID);
+  }
+ 
+  signOut(): void {
+    this.auth.signOut();
   }
 
 }

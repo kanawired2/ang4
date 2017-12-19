@@ -4,18 +4,17 @@
 <nav class="navbar navbar-default" style="color:white;background-color:#4c88e8;">
     <div class="container-fluid">
         <div class="navbar-header">
-            <span>
-            	<a class="navbar-brand">
-              		<img src="assets\ngx-bootstrap.svg" class="logo">              
-            	</a>
-            </span> 
-            <span class="navbar-brand">
-            	<img src="assets\angular.png" class="logo">
-            </span>           
+            <a routerLink="/">
+                <span class="navbar-brand">
+                    <img src="assets\angular.png" class="logo">
+                    <img src="assets\ngx-bootstrap.svg" class="logo">
+                </span>
+            </a>            
         </div>
         <ul class="nav navbar-nav">
-            <li><a routerLink="/login">Login</a></li>
-            <li class="dropdown" dropdown> <!-- {1} -->
+            <li *ngIf="!user"><a routerLink="/login">Login</a></li>
+            <li *ngIf="user"><a routerLink="/logout">Logout</a></li>
+            <li *ngIf="user" class="dropdown" dropdown> <!-- {1} -->
                 <a dropdownToggle role="button"> <!-- {2} -->
                   Request <span class="caret"></span></a>
                 <ul *dropdownMenu class="dropdown-menu"> <!-- {3} -->
@@ -32,6 +31,14 @@
         </ul>
     </div>
 </nav>
+<!-- <p> {{ user | json }} </p> -->
+
+<div class="container">
+    <h1>Ang4 Dashboard</h1>
+    <div class="row">
+        Welcome <span *ngIf="!user">Guest!</span><span *ngIf="user">{{user.name}}</span>
+    </div>
+</div>
 
 
 <router-outlet></router-outlet>

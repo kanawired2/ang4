@@ -3,14 +3,14 @@ import {Router} from "@angular/router";
 import { HttpClient } from '@angular/common/http';
 
 @Injectable()
-export class AuthService {
+export class AuthServiceProvider {
 
   private LoginUrl = "http://dev-dstack.pantheonsite.io/user/login?_format=json";
 
   constructor(private router: Router, protected httpClient: HttpClient) { }
 
   	doAuth(u,p) {
-	  const req = this.httpClient.post(this.LoginUrl , {
+	    const req = this.httpClient.post(this.LoginUrl , {
           name: u,
           pass: p
         }).subscribe(
@@ -22,7 +22,7 @@ export class AuthService {
               alert('Wrong Credentials!');
               console.log("Error occured");
             }
-        ); 
+      ); 
   	}
 
 }
