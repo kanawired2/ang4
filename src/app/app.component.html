@@ -1,39 +1,7 @@
 
 <!-- <a routerLink="/nodes">Nodes</a> -->
 
-<nav class="navbar navbar-default" style="color:white;background-color:#4c88e8;">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a routerLink="/">
-                <span class="navbar-brand">
-                    <img src="assets\angular.png" class="logo">
-                    <img src="assets\ngx-bootstrap.svg" class="logo">
-                </span>
-            </a>            
-        </div>
-        <ul class="nav navbar-nav">
-            <li *ngIf="!loggedIn"><a routerLink="/login">Login</a></li>
-            <li *ngIf="loggedIn"><a routerLink="/logout">Logout</a></li>
-            <li *ngIf="loggedIn" class="dropdown" dropdown> <!-- {1} -->
-                <a dropdownToggle role="button"> <!-- {2} -->
-                  Request <span class="caret"></span></a>
-                <ul *dropdownMenu class="dropdown-menu"> <!-- {3} -->
-                    <li role="separator" class="divider"></li>
-                    <li>
-						<a routerLink="/nodes">Nodes From Dtutor</a>
-					</li>
-                    <li role="separator" class="divider"></li>
-                    <li>
-						<a routerLink="/users">Users From Dtutor</a>
-					</li>
-                </ul>
-            </li>
-        </ul>
-    </div>
-</nav>
-<p> {{ loggedIn | json }} </p>
-
-<h1>Ang4 Dashboard</h1>
+<app-header></app-header>
 <ng4-loading-spinner> </ng4-loading-spinner>
 
 <router-outlet></router-outlet>

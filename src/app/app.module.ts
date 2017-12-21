@@ -23,6 +23,7 @@ import { ViewComponent } from './view/view.component';
 import { AuthServiceProvider } from './auth.service';
 import { DemoComponent } from './demo/demo.component';
 import { LogoutComponent } from './logout/logout.component';
+import { HeaderComponent } from './header/header.component';
 
 export function buildService() {
   let config = new AuthServiceConfig([
@@ -90,7 +91,8 @@ export function buildService() {
         UsersComponent,
         ViewComponent,
         DemoComponent,
-        LogoutComponent
+        LogoutComponent,
+        HeaderComponent
   ],
   providers: [
         ArticleService,

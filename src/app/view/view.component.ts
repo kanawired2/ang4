@@ -6,6 +6,8 @@ import { ApiService } from '../api.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
+import { AuthServiceProvider } from '../auth.service';
+
 @Component({
   selector: 'app-view',
   templateUrl: './view.component.html',
@@ -18,22 +20,27 @@ export class ViewComponent implements OnInit {
   created:any;
   title:any;
   uid:number;
+  private loggedIn: boolean;
 
-  constructor(private modalService: BsModalService,private router: Router, protected httpClient: HttpClient, private apiservice: ApiService) { }
+  constructor(private modalService: BsModalService,private router: Router, protected httpClient: HttpClient, private apiservice: ApiService, private authService: AuthServiceProvider) { }
 
   ngOnInit() {
-  	
-    this.apiservice.viewContent().subscribe(
-      data => {
-        let myContainer = <HTMLElement> document.querySelector("#content");
-        let myTitle = <HTMLElement> document.querySelector("#title");
-        myContainer.innerHTML = data['body'][0]['value'];
-        myTitle.innerHTML = data['title'][0]['value'];
-        this.created = data['created'][0]['value'];        
-        this.title = data['title'][0]['value'];        
-        this.uid = data['uid'][0]['target_id'];        
-      }
-    );
+  	this.loggedIn = this.authService.authCheck();
+    if(this.loggedIn) {
+      this.apiservice.viewContent().subscribe(
+        data => {
+          let myContainer = <HTMLElement> document.querySelector("#content");
+          let myTitle = <HTMLElement> document.querySelector("#title");
+          myContainer.innerHTML = data['body'][0]['value'];
+          myTitle.innerHTML = data['title'][0]['value'];
+          this.created = data['created'][0]['value'];        
+          this.title = data['title'][0]['value'];        
+          this.uid = data['uid'][0]['target_id'];        
+        }
+      );  
+    }else
+      this.router.navigateByUrl('login');      
+    
   }
 
   openModalWithComponent() {
