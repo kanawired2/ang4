@@ -1,11 +1,13 @@
 import {Component, OnInit} from "@angular/core";
 import { ApiService } from "../api.service";
+import { AuthServiceProvider } from '../auth.service';
 import { Observable } from "rxjs/Observable";
 import {IPosts} from "../posts";
 import { HttpClient } from '@angular/common/http';
 import {Router} from "@angular/router";
 
 import {NgxPaginationModule} from 'ngx-pagination';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 
  
 @Component({
@@ -16,11 +18,13 @@ import {NgxPaginationModule} from 'ngx-pagination';
  
 export class PostsComponent implements OnInit {
     _postsArray: IPosts[];
+    isDataLoaded:boolean = false;
+    private loggedIn: boolean;
     
     private Url = '';
     p: number = 1;
 
-    constructor(private apiSerivce: ApiService, protected httpClient: HttpClient, private router: Router) {
+    constructor(private authService:AuthServiceProvider,private spinnerService: Ng4LoadingSpinnerService,private apiSerivce: ApiService, protected httpClient: HttpClient, private router: Router) {
     }
 
     getPosts(): void {
@@ -53,6 +57,10 @@ export class PostsComponent implements OnInit {
 
 
     ngOnInit(): void {
-        this.getPosts();
+        this.loggedIn = this.authService.authCheck();
+        if(this.loggedIn)
+            this.getPosts();
+        else
+            this.router.navigateByUrl('login');
     }
 }

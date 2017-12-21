@@ -1,7 +1,7 @@
 <div class="container">
 	<!-- <pre>Pristine? {{ myform.pristine }}</pre> -->
     <div class="row">
-		<form [formGroup]="myform" (ngSubmit)="signInWithGoogle()">
+		<form [formGroup]="myform" (ngSubmit)="doSubmit($event)">
 		  	<div class="form-group">
 			  <label>Username</label>
 			  <input formControlName="name" class="has-danger" name="username" id="username" type="text">

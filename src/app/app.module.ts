@@ -9,6 +9,7 @@ import { AppBootstrapModule } from './app-bootstrap/app-bootstrap.module';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { SocialLoginModule, AuthServiceConfig } from "angular4-social-login";
 import { GoogleLoginProvider, FacebookLoginProvider } from "angular4-social-login";
+import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 
 import { AppComponent }  from './app.component';
 import { ArticleComponent }  from './article.component';
@@ -23,17 +24,21 @@ import { AuthServiceProvider } from './auth.service';
 import { DemoComponent } from './demo/demo.component';
 import { LogoutComponent } from './logout/logout.component';
 
-let config = new AuthServiceConfig([
-  {
-    id: GoogleLoginProvider.PROVIDER_ID,
-    provider: new GoogleLoginProvider("609263946698-e4pmu9dktbudduvig5tmb9acmjhc1knu.apps.googleusercontent.com")
-    //SQBkZ7zwcRfnHb8cfBTo3JS_
-  },
-  {
-    id: FacebookLoginProvider.PROVIDER_ID,
-    provider: new FacebookLoginProvider("Facebook-App-Id")
-  }
-]);
+export function buildService() {
+  let config = new AuthServiceConfig([
+    {
+      id: GoogleLoginProvider.PROVIDER_ID,
+      provider: new GoogleLoginProvider("609263946698-e4pmu9dktbudduvig5tmb9acmjhc1knu.apps.googleusercontent.com")
+      //SQBkZ7zwcRfnHb8cfBTo3JS_
+    },
+    {
+      id: FacebookLoginProvider.PROVIDER_ID,
+      provider: new FacebookLoginProvider("Facebook-App-Id")
+    }
+  ]);
+  return config;
+}
+
 
 @NgModule({
   entryComponents: [
@@ -42,7 +47,8 @@ let config = new AuthServiceConfig([
   imports: [     
         AppBootstrapModule,
         NgxPaginationModule,
-        SocialLoginModule.initialize(config),
+        SocialLoginModule.initialize(buildService()),
+        Ng4LoadingSpinnerModule.forRoot(),
         BrowserModule,
         HttpModule,
         FormsModule,

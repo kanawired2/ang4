@@ -12,9 +12,9 @@
             </a>            
         </div>
         <ul class="nav navbar-nav">
-            <li *ngIf="!user"><a routerLink="/login">Login</a></li>
-            <li *ngIf="user"><a routerLink="/logout">Logout</a></li>
-            <li *ngIf="user" class="dropdown" dropdown> <!-- {1} -->
+            <li *ngIf="!loggedIn"><a routerLink="/login">Login</a></li>
+            <li *ngIf="loggedIn"><a routerLink="/logout">Logout</a></li>
+            <li *ngIf="loggedIn" class="dropdown" dropdown> <!-- {1} -->
                 <a dropdownToggle role="button"> <!-- {2} -->
                   Request <span class="caret"></span></a>
                 <ul *dropdownMenu class="dropdown-menu"> <!-- {3} -->
@@ -31,15 +31,10 @@
         </ul>
     </div>
 </nav>
-<!-- <p> {{ user | json }} </p> -->
+<p> {{ loggedIn | json }} </p>
 
-<div class="container">
-    <h1>Ang4 Dashboard</h1>
-    <div class="row">
-        Welcome <span *ngIf="!user">Guest!</span><span *ngIf="user">{{user.name}}</span>
-    </div>
-</div>
-
+<h1>Ang4 Dashboard</h1>
+<ng4-loading-spinner> </ng4-loading-spinner>
 
 <router-outlet></router-outlet>
 

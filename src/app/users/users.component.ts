@@ -8,6 +8,8 @@ import {NgxPaginationModule} from 'ngx-pagination';
 
 import { AuthService, SocialUser } from "angular4-social-login";
 
+import { AuthServiceProvider } from '../auth.service';
+
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
@@ -17,10 +19,12 @@ export class UsersComponent implements OnInit {
 
   result:any;
   p: number = 1;
+  private loggedIn: boolean;
+
 
   private URL_users = "http://dev-dstack.pantheonsite.io/jusers";
 
-  constructor(private router: Router, protected httpClient: HttpClient, private authService: AuthService) { }
+  constructor(private router: Router, protected httpClient: HttpClient,private authService: AuthServiceProvider, private authservice: AuthService) { }
 
   ngOnInit() {
   	
@@ -34,10 +38,14 @@ export class UsersComponent implements OnInit {
         );
       }
     });*/
-    this.httpClient.get(this.URL_users).subscribe(
-      resultArray => this.result = resultArray,
-      error => console.log("Error :: " + error)
-    );  		
+    this.loggedIn = this.authService.authCheck();
+    if(this.loggedIn)
+      this.httpClient.get(this.URL_users).subscribe(
+        resultArray => this.result = resultArray,
+        error => console.log("Error :: " + error)
+      );
+    else
+      this.router.navigateByUrl('login');  		
   }
 
   	
